@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leticia & Victor - Nosso Casamento</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* ========== RESET & BASE ========== */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --blue-serenity: #92b4d4;
+            --blue-light: #c5d8ea;
+            --blue-lighter: #e8f0f7;
+            --blue-dark: #6a97c1;
+            --white: #ffffff;
+            --off-white: #fafbfc;
+            --gray-light: #e2e8f0;
+            --gray: #94a3b8;
+            --text-dark: #334155;
+            --text-medium: #64748b;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            color: var(--text-dark);
+            background-color: var(--white);
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
+
+        /* ========== NAVIGATION ========== */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            transition: all 0.4s ease;
+            background: transparent;
+        }
+
+        nav.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 1px 20px rgba(146, 180, 212, 0.15);
+            padding: 0.7rem 2rem;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            font-size: 0.78rem;
+            letter-spacing: 2px;
+            font-weight: 500;
+            text-transform: uppercase;
+            color: var(--white);
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        nav.scrolled a {
+            color: var(--text-medium);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--blue-serenity);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            z-index: 1001;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--white);
+            margin: 5px 0;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled .menu-toggle span {
+            background: var(--text-dark);
+        }
+
+        /* ========== HERO SECTION ========== */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(
+                135deg,
+                var(--blue-serenity) 0%,
+                var(--blue-light) 50%,
+                var(--blue-serenity) 100%
+            );
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(ellipse at 20% 50%, rgba(255,255,255,0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 80%, rgba(255,255,255,0.08) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-ornament {
+            font-size: 1.5rem;
+            color: rgba(255,255,255,0.85);
+            margin-bottom: 1rem;
+            letter-spacing: 8px;
+        }
+
+        .hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            font-size: clamp(4rem, 10vw, 7.5rem);
+            color: var(--white);
+            letter-spacing: 6px;
+            line-height: 1.15;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 20px rgba(0,0,0,0.08);
+        }
+
+        .hero h1 .amp {
+            font-style: italic;
+            font-weight: 500;
+            display: block;
+            font-size: 0.5em;
+            margin: 0.3rem 0;
+            opacity: 0.9;
+        }
+
+        .hero-date {
+            font-size: 1.05rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--white);
+            margin-top: 1.8rem;
+            font-weight: 500;
+            text-shadow: 0 1px 10px rgba(0,0,0,0.06);
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: scrollBounce 2s infinite;
+        }
+
+        .hero-scroll svg {
+            width: 24px;
+            height: 24px;
+            stroke: rgba(255,255,255,0.6);
+            fill: none;
+            stroke-width: 2;
+        }
+
+        @keyframes scrollBounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(8px); }
+        }
+
+        /* ========== FLORES DECORATIVAS ========== */
+        .hero-flowers {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .flower {
+            position: absolute;
+            opacity: 0.4;
+            animation: floatFlower 20s infinite ease-in-out;
+        }
+
+        .flower svg {
+            filter: drop-shadow(0 2px 8px rgba(255,255,255,0.3));
+        }
+
+        .flower:nth-child(1) {
+            top: 10%;
+            left: 5%;
+            animation-delay: 0s;
+            animation-duration: 25s;
+        }
+
+        .flower:nth-child(2) {
+            top: 20%;
+            right: 8%;
+            animation-delay: 3s;
+            animation-duration: 22s;
+        }
+
+        .flower:nth-child(3) {
+            bottom: 15%;
+            left: 10%;
+            animation-delay: 5s;
+            animation-duration: 28s;
+        }
+
+        .flower:nth-child(4) {
+            bottom: 25%;
+            right: 12%;
+            animation-delay: 2s;
+            animation-duration: 24s;
+        }
+
+        .flower:nth-child(5) {
+            top: 35%;
+            left: 15%;
+            animation-delay: 7s;
+            animation-duration: 26s;
+            opacity: 0.3;
+        }
+
+        .flower:nth-child(6) {
+            top: 45%;
+            right: 18%;
+            animation-delay: 4s;
+            animation-duration: 23s;
+            opacity: 0.3;
+        }
+
+        @keyframes floatFlower {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            25% {
+                transform: translateY(-15px) rotate(5deg);
+            }
+            50% {
+                transform: translateY(-8px) rotate(-3deg);
+            }
+            75% {
+                transform: translateY(-20px) rotate(4deg);
+            }
+        }
+
+        /* ========== SECTIONS ========== */
+        section {
+            padding: 6rem 2rem;
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            font-size: clamp(2.2rem, 5vw, 3.2rem);
+            text-align: center;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-line {
+            width: 50px;
+            height: 1px;
+            background: var(--blue-serenity);
+            margin: 1rem auto 3rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+            max-width: 550px;
+            margin: -1.5rem auto 3rem;
+        }
+
+        /* ========== MESSAGE SECTION ========== */
+        .message {
+            background: var(--off-white);
+        }
+
+        .message-content {
+            max-width: 650px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .message-content p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--text-dark);
+            line-height: 2;
+            font-weight: 500;
+        }
+
+        .message-content .signature {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            color: var(--blue-serenity);
+            margin-top: 2rem;
+            font-style: normal;
+        }
+
+        /* ========== CEREMONY SECTION ========== */
+        .ceremony-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .ceremony-card {
+            text-align: center;
+            padding: 3rem 2rem;
+            border: 1px solid var(--gray-light);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+            background: var(--white);
+        }
+
+        .ceremony-card:hover {
+            border-color: var(--blue-light);
+            box-shadow: 0 10px 40px rgba(146, 180, 212, 0.12);
+            transform: translateY(-2px);
+        }
+
+        .ceremony-card .card-icon {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--blue-serenity);
+        }
+
+        .ceremony-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 500;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .ceremony-card p {
+            color: var(--text-dark);
+            font-size: 0.9rem;
+            line-height: 1.8;
+        }
+
+        .ceremony-card .card-time {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.4rem 1.2rem;
+            background: var(--blue-lighter);
+            color: var(--blue-dark);
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            border-radius: 2px;
+        }
+
+        /* ========== COUNTDOWN ========== */
+        .countdown-section {
+            background: linear-gradient(135deg, var(--blue-serenity), var(--blue-light));
+            color: var(--white);
+            text-align: center;
+        }
+
+        .countdown-section .section-title {
+            color: var(--white);
+        }
+
+        .countdown-section .section-line {
+            background: rgba(255,255,255,0.5);
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .countdown-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .countdown-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(3.5rem, 7vw, 5rem);
+            font-weight: 600;
+            line-height: 1;
+        }
+
+        .countdown-label {
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            opacity: 1;
+            margin-top: 0.5rem;
+            font-weight: 500;
+        }
+
+        .countdown-date-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            margin-top: 3rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        /* ========== PHOTOS ========== */
+        .photos {
+            background: var(--off-white);
+        }
+
+        .gallery {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.5rem;
+        }
+
+        .gallery-item {
+            aspect-ratio: 1;
+            background: var(--blue-lighter);
+            border-radius: 2px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(146, 180, 212, 0.2);
+        }
+
+        .gallery-item.tall {
+            grid-row: span 2;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-placeholder {
+            color: var(--blue-serenity);
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .gallery-placeholder svg {
+            display: block;
+            margin: 0 auto 0.8rem;
+            width: 32px;
+            height: 32px;
+            stroke: var(--blue-light);
+            fill: none;
+            stroke-width: 1.5;
+        }
+
+        .upload-hint {
+            text-align: center;
+            margin-top: 2rem;
+            color: var(--text-medium);
+            font-size: 0.8rem;
+        }
+
+        /* ========== PIX ========== */
+        .pix-section {
+            text-align: center;
+        }
+
+        .pix-container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            border: 1px solid var(--gray-light);
+            border-radius: 2px;
+            background: var(--white);
+        }
+
+        .pix-container p {
+            color: var(--text-medium);
+            font-size: 0.85rem;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .qr-placeholder {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 2rem;
+            background: var(--off-white);
+            border: 2px dashed var(--blue-light);
+            border-radius: 4px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--blue-serenity);
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .qr-placeholder:hover {
+            border-color: var(--blue-serenity);
+            background: var(--blue-lighter);
+        }
+
+        .qr-placeholder svg {
+            width: 40px;
+            height: 40px;
+            stroke: var(--blue-light);
+            fill: none;
+            stroke-width: 1.5;
+            margin-bottom: 0.8rem;
+        }
+
+        .pix-key {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            padding: 0.8rem 1.5rem;
+            background: var(--blue-lighter);
+            border-radius: 2px;
+            margin-top: 1.5rem;
+        }
+
+        .pix-key span {
+            color: var(--text-dark);
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            user-select: all;
+        }
+
+        .pix-key button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--blue-serenity);
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 0.3rem 0.6rem;
+            transition: color 0.3s;
+        }
+
+        .pix-key button:hover {
+            color: var(--blue-dark);
+        }
+
+        .copy-feedback {
+            font-size: 0.75rem;
+            color: var(--blue-dark);
+            margin-top: 0.8rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .copy-feedback.show {
+            opacity: 1;
+        }
+
+        /* ========== RSVP ========== */
+        .rsvp {
+            background: var(--off-white);
+        }
+
+        .rsvp-form {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-medium);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.9rem 1rem;
+            border: 1px solid var(--gray-light);
+            border-radius: 2px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            background: var(--white);
+            transition: border-color 0.3s ease;
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--blue-serenity);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-group select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            padding-right: 2.5rem;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem 2rem;
+            background: var(--blue-serenity);
+            color: var(--white);
+            border: none;
+            border-radius: 2px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .submit-btn:hover {
+            background: var(--blue-dark);
+        }
+
+        .submit-btn:active {
+            transform: scale(0.98);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .submit-btn.loading {
+            position: relative;
+            color: transparent;
+        }
+
+        .submit-btn.loading::after {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            top: 50%;
+            left: 50%;
+            margin-left: -8px;
+            margin-top: -8px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .form-success {
+            display: none;
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+
+        .form-success.show {
+            display: block;
+        }
+
+        .form-success .check-icon {
+            width: 60px;
+            height: 60px;
+            border: 2px solid var(--blue-serenity);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: var(--blue-serenity);
+            font-size: 1.5rem;
+        }
+
+        .form-success h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
+            font-size: 1.8rem;
+            color: var(--text-dark);
+            margin-bottom: 0.8rem;
+        }
+
+        .form-success p {
+            color: var(--text-medium);
+            font-size: 0.9rem;
+        }
+
+        /* ========== FOOTER ========== */
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: var(--white);
+            border-top: 1px solid var(--gray-light);
+        }
+
+        footer .footer-names {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 400;
+            color: var(--blue-serenity);
+            margin-bottom: 0.5rem;
+        }
+
+        footer p {
+            color: var(--gray);
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+        }
+
+        /* ========== ANIMATIONS ========== */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 768px) {
+            nav {
+                display: none;
+            }
+
+            section {
+                padding: 4rem 1.5rem;
+            }
+
+            .countdown {
+                gap: 2rem;
+            }
+
+            .gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .gallery-item.tall {
+                grid-row: span 1;
+            }
+
+            .ceremony-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                letter-spacing: 2px;
+            }
+
+            .countdown {
+                gap: 1.5rem;
+            }
+
+            .gallery {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <ul id="navMenu">
+            <li><a href="#inicio">Início</a></li>
+            <li><a href="#mensagem">Mensagem</a></li>
+            <li><a href="#cerimonia">Cerimônia</a></li>
+            <li><a href="#data">Nossa Data</a></li>
+            <li><a href="#pix">Presente</a></li>
+            <li><a href="#presenca">Presença</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero" id="inicio">
+        <div class="hero-flowers">
+            <div class="flower">
+                <svg width="60" height="60" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="30" r="12" fill="white" opacity="0.9"/>
+                    <circle cx="70" cy="50" r="12" fill="white" opacity="0.9"/>
+                    <circle cx="50" cy="70" r="12" fill="white" opacity="0.9"/>
+                    <circle cx="30" cy="50" r="12" fill="white" opacity="0.9"/>
+                    <circle cx="50" cy="50" r="8" fill="#f0e68c" opacity="0.8"/>
+                </svg>
+            </div>
+            <div class="flower">
+                <svg width="50" height="50" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="30" r="12" fill="white" opacity="0.9"/>
+                    <circle cx="70" cy="50" r="12" fill="white" opacity="0.9"/>
+                    <circle cx="50" cy="70" r="12" fill="white" opacity="0.9"/>
+                    <circle cx="30" cy="50" r="12" fill="white" opacity="0.9"/>
+                    <circle cx="50" cy="50" r="8" fill="#f0e68c" opacity="0.8"/>
+                </svg>
+            </div>
+            <div class="flower">
+                <svg width="55" height="55" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="30" r="12" fill="white" opacity="0.9"/>
+                    <circle cx="70" cy="50" r="12" fill="white" opacity="0.9"/>
+                    <circle cx="50" cy="70" r="12" fill="white" opacity="0.9"/>
+                    <circle cx="30" cy="50" r="12" fill="white" opacity="0.9"/>
+                    <circle cx="50" cy="50" r="8" fill="#f0e68c" opacity="0.8"/>
+                </svg>
+            </div>
+            <div class="flower">
+                <svg width="45" height="45" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="30" r="12" fill="white" opacity="0.9"/>
+                    <circle cx="70" cy="50" r="12" fill="white" opacity="0.9"/>
+                    <circle cx="50" cy="70" r="12" fill="white" opacity="0.9"/>
+                    <circle cx="30" cy="50" r="12" fill="white" opacity="0.9"/>
+                    <circle cx="50" cy="50" r="8" fill="#f0e68c" opacity="0.8"/>
+                </svg>
+            </div>
+            <div class="flower">
+                <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="30" r="12" fill="white" opacity="0.9"/>
+                    <circle cx="70" cy="50" r="12" fill="white" opacity="0.9"/>
+                    <circle cx="50" cy="70" r="12" fill="white" opacity="0.9"/>
+                    <circle cx="30" cy="50" r="12" fill="white" opacity="0.9"/>
+                    <circle cx="50" cy="50" r="8" fill="#f0e68c" opacity="0.8"/>
+                </svg>
+            </div>
+            <div class="flower">
+                <svg width="48" height="48" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="30" r="12" fill="white" opacity="0.9"/>
+                    <circle cx="70" cy="50" r="12" fill="white" opacity="0.9"/>
+                    <circle cx="50" cy="70" r="12" fill="white" opacity="0.9"/>
+                    <circle cx="30" cy="50" r="12" fill="white" opacity="0.9"/>
+                    <circle cx="50" cy="50" r="8" fill="#f0e68c" opacity="0.8"/>
+                </svg>
+            </div>
+        </div>
+        <div class="hero-ornament">✦ &nbsp; ✦ &nbsp; ✦</div>
+        <h1>
+            Leticia
+            <span class="amp">&</span>
+            Victor
+        </h1>
+        <p class="hero-date">18 de Abril de 2026<br>Goiânia - GO</p>
+        <div class="hero-scroll">
+            <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+        </div>
+    </section>
+
+    <!-- Mensagem -->
+    <section class="message" id="mensagem">
+        <div class="fade-in">
+            <h2 class="section-title">Nossa História</h2>
+            <div class="section-line"></div>
+            <div class="message-content">
+                <p>
+                    Com imensa alegria e corações transbordando de amor,
+                    convidamos você para celebrar conosco o início de uma
+                    nova e linda jornada. Sua presença tornará esse momento
+                    ainda mais especial e inesquecível.
+                </p>
+                <div class="signature">— Leticia & Victor</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cerimônia e Recepção -->
+    <section id="cerimonia">
+        <div class="fade-in">
+            <h2 class="section-title">Cerimônia & Recepção</h2>
+            <div class="section-line"></div>
+            <p class="section-subtitle">Cerimônia e recepção em um só lugar</p>
+            <div class="ceremony-cards" style="max-width:460px">
+                <div class="ceremony-card" style="padding:3rem 2.5rem">
+                    <div class="card-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/>
+                        </svg>
+                    </div>
+                    <h3 style="font-size:1.6rem">Casa Bollela</h3>
+                    <p style="margin-top:0.5rem">
+                        Cerimônia e Recepção<br><br>
+                        <strong>18/04/2026 às 17:00</strong><br><br>
+                        Peço que cheguem às 17:00h,<br>para que a cerimônia comece dentro do horário.
+                    </p>
+                    <span class="card-time" style="margin-top:1.5rem">17:00h</span>
+                    <p style="margin-top:1.5rem;font-size:0.82rem">
+                        R. 256, 120 - St. Coimbra<br>
+                        Goiânia - GO, 74535-450
+                    </p>
+                    <a href="https://maps.app.goo.gl/pjDtCNSEojo5hD8fA" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.4rem;margin-top:1.2rem;padding:0.5rem 1.5rem;background:var(--blue-lighter);color:var(--blue-dark);text-decoration:none;font-size:0.75rem;letter-spacing:1px;text-transform:uppercase;border-radius:2px;transition:all 0.3s ease">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        Ver no mapa
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nossa Data / Contagem Regressiva -->
+    <section class="countdown-section" id="data">
+        <div class="fade-in">
+            <h2 class="section-title">Nossa Data</h2>
+            <div class="section-line"></div>
+            <div class="countdown" id="countdown">
+                <div class="countdown-item">
+                    <span class="countdown-number" id="days">000</span>
+                    <span class="countdown-label">Dias</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="hours">00</span>
+                    <span class="countdown-label">Horas</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="minutes">00</span>
+                    <span class="countdown-label">Minutos</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="seconds">00</span>
+                    <span class="countdown-label">Segundos</span>
+                </div>
+            </div>
+            <p class="countdown-date-text">18 de Abril de 2026 — às 17:00</p>
+        </div>
+    </section>
+
+    <!-- PIX -->
+    <section class="pix-section" id="pix">
+        <div class="fade-in">
+            <h2 class="section-title">Lista de Presentes</h2>
+            <div class="section-line"></div>
+            <p class="section-subtitle">Sua presença é o nosso maior presente, mas se desejar nos presentear...</p>
+            <div class="pix-container">
+                <p>
+                    Optamos por uma contribuição via PIX.<br>
+                    Escaneie o QR Code abaixo ou copie a chave PIX.
+                </p>
+                <div style="width: 280px; height: 280px; margin: 0 auto 2rem; border-radius: 4px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                    <img src="https://i.imgur.com/WXwPLIr.png" alt="QR Code PIX" style="width: 100%; height: 100%; object-fit: contain; background: white;">
+                </div>
+                <div class="pix-key">
+                    <span id="pixKey" data-raw="62981202149">(62) 98120-2149</span>
+                    <button onclick="copyPix()">Copiar</button>
+                </div>
+                <p class="copy-feedback" id="copyFeedback">✓ Chave copiada!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Confirmação de Presença -->
+    <section class="rsvp" id="presenca">
+        <div class="fade-in">
+            <h2 class="section-title">Confirmação de Presença</h2>
+            <div class="section-line"></div>
+            <p class="section-subtitle">Confirme sua presença até 30 dias antes do evento</p>
+
+            <form class="rsvp-form" id="rsvpForm">
+                <div class="form-group">
+                    <label for="name">Nome Completo</label>
+                    <input type="text" id="name" name="name" required placeholder="Seu nome">
+                </div>
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" name="email" required placeholder="seu@email.com">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Telefone</label>
+                    <input type="tel" id="phone" name="phone" placeholder="(00) 00000-0000">
+                </div>
+                <div class="form-group">
+                    <label for="guests">Número de Convidados</label>
+                    <select id="guests" name="guests">
+                        <option value="1">1 pessoa</option>
+                        <option value="2">2 pessoas</option>
+                        <option value="3">3 pessoas</option>
+                        <option value="4">4 pessoas</option>
+                        <option value="5">5 pessoas</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="message">Mensagem para os Noivos</label>
+                    <textarea id="message" name="message" placeholder="Deixe uma mensagem carinhosa..."></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Confirmar Presença</button>
+            </form>
+
+            <div class="form-success" id="formSuccess">
+                <div class="check-icon">✓</div>
+                <h3>Presença Confirmada!</h3>
+                <p>Obrigado por confirmar. Estamos ansiosos para celebrar com você!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-names">L & V</div>
+        <p>Feito com amor — 2026</p>
+    </footer>
+
+    <script>
+        // ========== NAVBAR SCROLL ==========
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // ========== MOBILE MENU ==========
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('open');
+            menuToggle.classList.toggle('active');
+        });
+
+        navMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('open');
+                menuToggle.classList.remove('active');
+            });
+        });
+
+        // ========== COUNTDOWN ==========
+        // ALTERE A DATA DO CASAMENTO AQUI:
+        const weddingDate = new Date('2026-04-18T17:00:00').getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const diff = weddingDate - now;
+
+            if (diff <= 0) {
+                document.getElementById('days').textContent = '0';
+                document.getElementById('hours').textContent = '0';
+                document.getElementById('minutes').textContent = '0';
+                document.getElementById('seconds').textContent = '0';
+                return;
+            }
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = days;
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+        }
+
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        // ========== COPY PIX ==========
+        function copyPix() {
+            const pixKeyElement = document.getElementById('pixKey');
+            const pixKey = pixKeyElement.getAttribute('data-raw') || pixKeyElement.textContent;
+            navigator.clipboard.writeText(pixKey).then(() => {
+                const feedback = document.getElementById('copyFeedback');
+                feedback.classList.add('show');
+                setTimeout(() => feedback.classList.remove('show'), 2000);
+            }).catch(() => {
+                // Fallback para navegadores antigos
+                const textarea = document.createElement('textarea');
+                textarea.value = document.getElementById('pixKey').textContent;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                const feedback = document.getElementById('copyFeedback');
+                feedback.classList.add('show');
+                setTimeout(() => feedback.classList.remove('show'), 2000);
+            });
+        }
+
+        // ========== RSVP FORM ==========
+        const rsvpForm = document.getElementById('rsvpForm');
+        const formSuccess = document.getElementById('formSuccess');
+        const submitBtn = rsvpForm.querySelector('.submit-btn');
+
+        rsvpForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            // Desabilita o botão e mostra loading
+            submitBtn.disabled = true;
+            submitBtn.classList.add('loading');
+
+            // URL do Google Apps Script
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbwxTBNf1-yvKfCytVv39YnBIIXRfC_zM2xsFRHeeMMUTtI6dqWHmL13JE1ncjj_bjFa/exec';
+
+            // Coleta dos dados
+            const formData = new FormData(rsvpForm);
+
+            // Envia para o Google Sheets
+            fetch(scriptURL, {
+                method: 'POST',
+                mode: 'no-cors',
+                body: formData
+            })
+            .then(response => {
+                console.log('Sucesso!', response);
+                // Mostra mensagem de sucesso
+                rsvpForm.style.display = 'none';
+                formSuccess.classList.add('show');
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+                // Ainda mostra sucesso para o usuário
+                rsvpForm.style.display = 'none';
+                formSuccess.classList.add('show');
+            });
+        });
+
+        // ========== SCROLL ANIMATIONS ==========
+        const fadeElements = document.querySelectorAll('.fade-in');
+
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        fadeElements.forEach(el => observer.observe(el));
+
+        // ========== PHONE MASK ==========
+        const phoneInput = document.getElementById('phone');
+        phoneInput.addEventListener('input', (e) => {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 11) value = value.slice(0, 11);
+
+            if (value.length > 6) {
+                value = `(${value.slice(0,2)}) ${value.slice(2,7)}-${value.slice(7)}`;
+            } else if (value.length > 2) {
+                value = `(${value.slice(0,2)}) ${value.slice(2)}`;
+            } else if (value.length > 0) {
+                value = `(${value}`;
+            }
+
+            e.target.value = value;
+        });
+    </script>
+
+</body>
+</html>
