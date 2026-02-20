@@ -1061,6 +1061,7 @@
                         <option value="5">5 pessoas</option>
                     </select>
                 </div>
+                <div id="additionalGuests" style="display:none;"></div>
                 <div class="form-group">
                     <label for="message">Mensagem para os Noivos</label>
                     <textarea id="message" name="message" placeholder="Deixe uma mensagem carinhosa..."></textarea>
@@ -1161,6 +1162,29 @@
         const rsvpForm = document.getElementById('rsvpForm');
         const formSuccess = document.getElementById('formSuccess');
         const submitBtn = rsvpForm.querySelector('.submit-btn');
+        const guestsSelect = document.getElementById('guests');
+        const additionalGuestsDiv = document.getElementById('additionalGuests');
+
+        // Adiciona campos dinâmicos quando mudar o número de convidados
+        guestsSelect.addEventListener('change', function() {
+            const numGuests = parseInt(this.value);
+            additionalGuestsDiv.innerHTML = '';
+            
+            if (numGuests > 1) {
+                additionalGuestsDiv.style.display = 'block';
+                for (let i = 2; i <= numGuests; i++) {
+                    const guestDiv = document.createElement('div');
+                    guestDiv.className = 'form-group';
+                    guestDiv.innerHTML = `
+                        <label for="guest${i}">Nome do ${i}º Convidado</label>
+                        <input type="text" id="guest${i}" name="guest${i}" required placeholder="Nome completo">
+                    `;
+                    additionalGuestsDiv.appendChild(guestDiv);
+                }
+            } else {
+                additionalGuestsDiv.style.display = 'none';
+            }
+        });
 
         rsvpForm.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -1169,7 +1193,7 @@
             submitBtn.disabled = true;
             submitBtn.classList.add('loading');
 
-            // URL do Google Apps Script
+            // URL do Google Apps Script (você precisa substituir pela sua URL)
             const scriptURL = 'https://script.google.com/macros/s/AKfycbwxTBNf1-yvKfCytVv39YnBIIXRfC_zM2xsFRHeeMMUTtI6dqWHmL13JE1ncjj_bjFa/exec';
 
             // Coleta dos dados
